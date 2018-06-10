@@ -16,9 +16,11 @@ io.on("connection",(socket)=>{
 console.log("New user connected");
 
 
-    socket.on("createMessage",(message)=>{
+    socket.on("createMessage",(message,callback)=>{
     //console.log("new Message",message);
+  
      io.emit('newMessage',generateMessage(message.from,message.text));
+     callback('Acknowledgement from server');
  })
 
 //Admin welcome message
@@ -30,7 +32,7 @@ socket.broadcast.emit('newMessage',generateMessage('Admin','A new User has joine
 
 
  socket.on("disconnect",()=>{
-    console.log("USer was disconnected");
+    console.log("User was disconnected");
  })
 
 
